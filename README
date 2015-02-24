@@ -1,2 +1,13 @@
 A set of codes for modeling and visualizing the dynamics of 
 simple classical pendulum systems. 
+
+single_pendulum_code_matlab/ 
+- contains Matlab codes
+
+single_pendulum_code_C_opengl/
+- contains standalone C with OpenGl code
+
+The OpenGL version has been tested on Linux with the free glut library. 
+To compile, see the compile.sh script. 
+
+Sergey Voronin, 2015.
