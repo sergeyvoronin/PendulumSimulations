@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const int milliseconds_per_frame = 5;  // min ms per frame 
+const int ms_per_frame = 5;  // min ms per frame 
 
 int time_step_counter = -1;
 double *thetas, *vs;
@@ -114,7 +114,7 @@ void drawPendulum(double theta) {
 }
 
 void display(void) {
-    glutTimerFunc(milliseconds_per_frame,timer,1);  
+    glutTimerFunc(ms_per_frame,timer,1);  
 
     glClearColor (0.0,0.0,0.0,1.0);
     glClear (GL_COLOR_BUFFER_BIT);
