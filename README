@@ -5,7 +5,7 @@ single_pendulum_code_matlab/
 - contains Matlab codes
 
 single_pendulum_code_C_opengl/
-- contains standalone C with OpenGl code
+- contains standalone C/C++ with OpenGl code
 
 The OpenGL version has been tested on Linux with the free glut library. 
 To compile, see the compile.sh script. 

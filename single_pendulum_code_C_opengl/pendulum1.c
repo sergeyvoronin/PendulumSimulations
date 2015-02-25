@@ -8,7 +8,7 @@
 using namespace std;
 
 const int ms_per_frame = 5;  // min ms per frame 
-int time_step_counter = -1;
+int time_step_counter = -1, pause_flag = 0;
 double *times, *thetas, *vs;
 
 // pendulum parameters
@@ -17,9 +17,11 @@ double g = 9.8, theta0 = 3.1416/4, v0 = 0, ti = 0, tf = 20, alpha = 30, m = 50;
 
 
 void timer(int id) {
-    time_step_counter++;
-    if(time_step_counter >= N){
-        time_step_counter = 0;
+    if(pause_flag == 0){
+        time_step_counter++;
+        if(time_step_counter >= N){
+            time_step_counter = 0;
+        }
     }
     glutPostRedisplay();
 }
@@ -59,22 +61,6 @@ void rk4_sys_integrator(double g, int l, double alpha, double m, double theta0, 
         theta = theta + (k11 + 2*k21 + 2*k31 + k41)/6;
         v = v + (k12 + 2*k22 + 2*k32 + k42)/6;
         t = t + h;
-        /*
-        k11 = h*v; 
-        k12 = -h*(g/l)*sin(theta);
-
-        k21 = h*(v + k11/2);
-        k22 = -h*(g/l)*sin(theta + k12/2);
-
-        k31 = h*(v + k21/2);
-        k32 = -h*(g/l)*sin(theta + k22/2);
-
-        k41 = h*(v + k31);
-        k42 =  -h*(g/l)*sin(theta + k32);
-
-        theta = theta + (k11 + 2*k21 + 2*k31 + k41)/6;
-        v = v + (k12 + 2*k22 + 2*k32 + k42)/6;
-        */
 
         printf("i = %d, assigning theta = %f and v = %f\n", i, theta, v);
         (*thetas)[i] = theta;
@@ -82,16 +68,6 @@ void rk4_sys_integrator(double g, int l, double alpha, double m, double theta0, 
         (*times)[i] = t;
    }
 }
-
-
-
-/*void printString(double x, double y, double z, char *s)
-{
-    glRasterPos3d(x, y, z);
-
-    while (s!=NULL)
-        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *s++);
-}*/
 
 void printString(const char *str, double x, double y, double size) {
    glPushMatrix();
@@ -109,6 +85,7 @@ void printString(const char *str, double x, double y, double size) {
       }
       else {
          glutStrokeCharacter(GLUT_STROKE_ROMAN,str[i]);
+            //glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *s++);
          //glutStrokeCharacter(GLUT_BITMAP_TIMES_ROMAN_24,str[i]);
       }
    }
@@ -202,11 +179,20 @@ void reshape (int w, int h) {
     glMatrixMode (GL_MODELVIEW);
 }
 
-/* quit on escape key press */
+
+/* quit on escape key press and toggle start/stop of simulation with s key */
 void keyboard(unsigned char key, int x, int y){
     switch (key) {
         case 27:
             exit(0);
+            break;
+        case 115:
+            if(pause_flag == 0){
+                pause_flag = 1;
+            }
+            else{
+                pause_flag = 0;
+            }
             break;
     }
 }
