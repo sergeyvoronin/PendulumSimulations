@@ -13,8 +13,15 @@ double *times, *thetas, *vs;
 
 // pendulum parameters
 int l = 10, N = 2500;
-double g = 9.8, theta0 = 3.1416/4, v0 = 0, ti = 0, tf = 20, alpha = 30, m = 50;
+double g = 9.8, theta0 = 3.1416/4, v0 = 0, ti = 0, tf = 20, alpha = 20, m = 50;
 
+
+/* opengl options */
+void initgLOptions() {
+   glEnable(GL_BLEND);
+   glEnable(GL_LINE_SMOOTH);
+   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+}
 
 void timer(int id) {
     if(pause_flag == 0){
@@ -85,7 +92,6 @@ void printString(const char *str, double x, double y, double size) {
       }
       else {
          glutStrokeCharacter(GLUT_STROKE_ROMAN,str[i]);
-            //glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *s++);
          //glutStrokeCharacter(GLUT_BITMAP_TIMES_ROMAN_24,str[i]);
       }
    }
@@ -94,7 +100,6 @@ void printString(const char *str, double x, double y, double size) {
 
 
 void drawPendulum(double time, double theta, double v) {
-    glEnable(GL_LINE_SMOOTH);
 
     // The pendulum support anchor block
     glColor3f(0.7, 0.7, 0.7);
@@ -166,7 +171,6 @@ void display(void) {
 
     printf("time_step_counter = %d, drawing pendulum with angle %f\n", time_step_counter, thetas[time_step_counter]);
 
-    
     drawPendulum(times[time_step_counter],thetas[time_step_counter],vs[time_step_counter]);
     glutSwapBuffers();
 }
@@ -212,6 +216,7 @@ int main (int argc, char **argv) {
     //glutIdleFunc (display);
     glutReshapeFunc (reshape);
     glutKeyboardFunc (keyboard);
+    initgLOptions();
     glutMainLoop ();
 
     return 0;
