@@ -10,6 +10,6 @@ N = 1500;
 alpha = 30;
 m = 50;
 
-[angles,speeds] = rk4sys_integrator( N, ti, tf, [theta0; v0]'); 
+[angles,speeds] = rk4sys_integrator( g,l, alpha, m, theta0, v0, N, ti, tf); 
 
 plot_pendulum(l,angles,0);

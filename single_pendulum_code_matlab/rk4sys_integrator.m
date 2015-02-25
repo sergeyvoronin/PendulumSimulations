@@ -1,13 +1,15 @@
-function [angles,speeds] = rk4sys_integrator( N, ti, tf, u0, f )
+function [angles,vs] = rk4sys_integrator( g,l, alpha, m, theta0, v0, N, ti, tf)
 % Runge-Kutta 4th order method for ODE IVP system: 
 % u' = f(t,u), u(0) = u0
 % with N steps over the time interval [ti,tf],
 % u and f are vector functions
 h = (tf - ti)/N; 
-theta = u0(1); v = u0(2); t = ti;
+theta = theta0; v = v0; t = ti;
 angles = zeros(N,1);
-speeds = zeros(N,1);
-for i = 1 : N
+vs = zeros(N,1);
+angles(1) = theta;
+vs(1) = v;
+for i = 2 : N
     whos t u
     k11 = h*v;
     k12 = -h*(alpha/m)*v - h*(g/l)*sin(theta);
@@ -25,8 +27,7 @@ for i = 1 : N
     v = v + (k12 + 2*k22 + 2*k32 + k42)/6;
     t = t + h;
 
-
-    angles(i) = u(1);
-    speeds(i) = u(2);
-    fprintf('angle = %f, speed = %f\n', u(1), u(2));
+    angles(i) = theta;
+    vs(i) = v;
+    fprintf('angle = %f, v = %f\n', theta, v);
 end
