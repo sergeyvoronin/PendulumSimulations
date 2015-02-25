@@ -7,9 +7,9 @@ v0 = 0;
 ti = 0; 
 tf = 20;
 N = 1500;
+alpha = 30;
+m = 50;
 
-f = @(t,u)[ u(2); -(g/l)*sin(u(1)) ];
-
-[angles,speeds] = rk4sys_integrator( N, ti, tf, [theta0; v0], f ); 
+[angles,speeds] = rk4sys_integrator( N, ti, tf, [theta0; v0]'); 
 
 plot_pendulum(l,angles,0);
