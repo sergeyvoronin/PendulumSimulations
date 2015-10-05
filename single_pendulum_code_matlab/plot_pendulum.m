@@ -31,7 +31,7 @@ function plot_pendulum(l,angles,save_images)
         hold off
         xlim([-1.2*l,1.2*l]);
         ylim([-1.2*l,1.2*l]);
-        pause(0.02);
+        pause(0.01);
 
         if save_images == 1
             if i==1 || mod(i,50) == 0

@@ -13,7 +13,10 @@ double *times, *thetas, *vs;
 
 // pendulum parameters
 int l = 10, N = 2500;
-double g = 9.8, theta0 = 3.1416/4, v0 = 0, ti = 0, tf = 20, alpha = 20, m = 50;
+//double g = 9.8, theta0 = 3.1416/4, v0 = 1, ti = 0, tf = 20, alpha = 10, m = 50;
+//double g = 9.8, theta0 = 3.1416/4, v0 = 3, ti = 0, tf = 20, alpha = 4.5, m = 50;
+//double g = 9.8, theta0 = 3.1416, v0 = 0, ti = 0, tf = 20, alpha = 0, m = 50;
+double g = 9.8, theta0 = 0, v0 = 2.5, ti = 0, tf = 20, alpha = 12, m = 50;
 
 
 /* opengl options */
